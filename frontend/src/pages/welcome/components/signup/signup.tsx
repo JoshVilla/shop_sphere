@@ -4,8 +4,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons for visi
 import React, { useEffect, useMemo, useState } from "react";
 import { register } from "@/api/service";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { AppDispatch } from "@/store/store";
+import { getUserInfo } from "@/store/slice/userInfoSlice";
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
@@ -46,7 +52,8 @@ const Signup = () => {
 
       if (res.status === 201) {
         toast.success("Registration successful!");
-        console.log("Form is valid, proceed with registration.");
+        navigate("/homepage");
+        dispatch(getUserInfo(res.data.user));
       } else if (res.status === 200) {
         toast.error("Email already exists. Please use a different email.");
       } else {

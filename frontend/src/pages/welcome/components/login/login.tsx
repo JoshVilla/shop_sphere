@@ -1,10 +1,14 @@
 import { login } from "@/api/service";
+import { getUserInfo } from "@/store/slice/userInfoSlice";
+import { AppDispatch } from "@/store/store";
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons for visibility toggle
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const [showPassword, setShowPassword] = useState(false);
   const [formState, setFormState] = useState({
     email: "",
@@ -20,8 +24,8 @@ const Login = () => {
       const response = await login(formState);
 
       if (response.status === 200) {
-        console.log(response.data.message);
         navigate("/homepage");
+        dispatch(getUserInfo(response.data.user));
       }
     } catch (error) {
       console.log(error);

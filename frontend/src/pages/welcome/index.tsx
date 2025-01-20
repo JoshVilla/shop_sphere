@@ -5,7 +5,7 @@ import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 
 const Welcome = () => {
-  const [tab, setTab] = useState<number>(1);
+  const [tab, setTab] = useState<number>(0);
   return (
     <div className="min-h-screen relative">
       <div className=" text-border px-6 py-4 text-xl w-full absolute">
