@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import Welcome from "./pages/welcome";
 import Homepage from "./pages/customerPage/homepage";
+import CustomerLayout from "./layout/CustomerLayout";
 
 function App() {
-  const [theme, setTheme] = useState("light-theme");
-
-  // Toggle the theme
-  const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === "light-theme" ? "dark-theme" : "light-theme"
-    );
-  };
-
-  // Apply the theme to the HTML element
-  useEffect(() => {
-    const html = document.documentElement;
-    html.className = theme; // Set the className to the current theme
-  }, [theme]); // Runs whenever `theme` changes
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route index element={<Welcome />} />
+        <Route path="shop" element={<CustomerLayout />}>
+          <Route index element={<Homepage />} />{" "}
+          {/* Display Homepage when at /shop */}
+        </Route>
+      </>
+    )
+  );
 
   return (
     <React.Fragment>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/homepage" element={<Homepage />} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </React.Fragment>
   );
 }

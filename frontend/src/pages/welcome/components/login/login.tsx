@@ -24,7 +24,7 @@ const Login = () => {
       const response = await login(formState);
 
       if (response.status === 200) {
-        navigate("/homepage");
+        navigate("/shop");
         dispatch(getUserInfo(response.data.user));
       }
     } catch (error) {

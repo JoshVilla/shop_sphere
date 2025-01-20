@@ -4,16 +4,38 @@
 
 @import "./variables";
 
+// :root.dark-theme {
+//   --primary-color: #6247aa;
+//   --background-color: #0D1116;
+//   --text-color: #D4D4D6;
+//   --border-color: #F4F4F5;
+// }
+
+// :root.light-theme {
+//   --primary-color: #6247aa;
+//   --background-color: #F8F8F8;
+//   --text-color: #0D1116;
+//   --border-color: #1E2833;
+// }
+
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+// @import "./variables";
+
 :root.dark-theme {
-  --primary-color: #6247aa;
-  --background-color: #0D1116;
-  --text-color: #D4D4D6;
-  --border-color: #F4F4F5;
+  --primary-color: #56666F;
+  --background-color:  #0E161B;
+  --text-color: #FFFFFF;
+  --border-color: #162022;
+  --btn-color: #314048;
 }
 
 :root.light-theme {
-  --primary-color: #6247aa;
-  --background-color: #F8F8F8;
-  --text-color: #0D1116;
-  --border-color: #1E2833;
+  --primary-color: #5A9FD4; /* Light blue or a similar primary color */
+  --background-color: #F9FAFB; /* A very light gray or off-white */
+  --text-color: #1A202C; /* Dark text for readability on light backgrounds */
+  --border-color: #E2E8F0; /* Subtle border color */
+  --btn-color: #3182CE; /* Slightly darker primary for buttons */
 }
