@@ -6,6 +6,7 @@ import getUsers from "./controllers/register/register.js";
 import register from "./controllers/register/addUser.js";
 import loginCustomer from "./controllers/login/loginCutomer.js";
 import googleLogin from "./controllers/login/googleLogin.js";
+import saveAccount from "./controllers/saveAccount/saveAccount.js";
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.get("/users", getUsers); // Get users endpoint
 
 app.post("/login", loginCustomer);
 app.post("/googleLogin", googleLogin);
+app.post("/saveAccount", saveAccount);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on port ${process.env.PORT || 5000}`);
