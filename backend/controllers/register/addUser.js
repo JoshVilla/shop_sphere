@@ -33,7 +33,7 @@ const register = async (req, res) => {
     const { password: _, ...userInfo } = newUser.toObject();
     return res.status(201).json({
       message: "User registered successfully",
-      user: userInfo,
+      user: { ...userInfo, _id: userInfo._id },
     });
   } catch (error) {
     console.error("Error during registration:", error.message);

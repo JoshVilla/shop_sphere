@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  isThirdPartyAccount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const UserModel = mongoose.model("User", UserSchema);

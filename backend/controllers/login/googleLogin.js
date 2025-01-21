@@ -23,6 +23,7 @@ const googleLogin = async (req, res) => {
       firstname,
       lastname,
       password: "", // Google OAuth typically does not require a password
+      isThirdPartyAccount: 1,
     });
 
     console.log(newUser, "New user registered");

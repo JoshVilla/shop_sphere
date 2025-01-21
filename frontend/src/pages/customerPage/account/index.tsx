@@ -1,5 +1,7 @@
+import { saveAccount } from "@/api/service";
 import Input from "@/components/input";
 import { RootState } from "@/store/store";
+import { STATUS } from "@/utility/constant";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -19,9 +21,19 @@ const Account = () => {
     email: "",
   });
 
-  const saveAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // Prevent the button's default behavior
-    console.log(formState);
+  const handleSaveAccount = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault(); // Prevent the button's default behavior
+      console.log(formState);
+
+      const res = await saveAccount({ ...formState, id: info?._id });
+      console.log(info);
+      if (res.status === STATUS.SUCCESS) {
+        console.log(res);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -42,6 +54,7 @@ const Account = () => {
             <div>
               {/* <label>Username: </label> */}
               <Input
+                value={formState.username}
                 placeholder="Enter Username"
                 onChange={(e) =>
                   setFormState((prev) => ({
@@ -55,6 +68,7 @@ const Account = () => {
             <div>
               {/* <label>Firstname: </label> */}
               <Input
+                value={formState.firstname}
                 placeholder="Enter Firstname"
                 onChange={(e) =>
                   setFormState((prev) => ({
@@ -68,6 +82,7 @@ const Account = () => {
             <div>
               {/* <label>Lastname: </label> */}
               <Input
+                value={formState.lastname}
                 placeholder="Enter Lastname"
                 onChange={(e) =>
                   setFormState((prev) => ({
@@ -81,6 +96,7 @@ const Account = () => {
             <div>
               {/* <label>Email: </label> */}
               <Input
+                value={formState.email}
                 placeholder="Enter Email"
                 onChange={(e) =>
                   setFormState((prev) => ({ ...prev, email: e.target.value }))
@@ -88,7 +104,7 @@ const Account = () => {
               />
             </div>
             <button
-              onClick={saveAccount}
+              onClick={handleSaveAccount}
               type="submit"
               className="bg-primary p-2 rounded-md"
             >

@@ -53,7 +53,8 @@ const Login = () => {
       lastname: family_name,
     }).then((res) => {
       navigate("/main");
-      dispatch(getUserInfo(res.data.data));
+      console.log(res.data);
+      dispatch(getUserInfo(res.data.user));
     });
   };
 
