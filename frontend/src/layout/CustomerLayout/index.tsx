@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { IoIosSunny, IoIosMoon } from "react-icons/io";
-
+import DefaultAvatar from "@/assets/user-avatar.png";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 type Props = {};
 
 const CustomerLayout = (props: Props) => {
+  const accountInfo = useSelector(
+    (state: RootState) => state.userInfo.userInfo
+  );
   const [theme, setTheme] = useState<string>(() => {
     // Check if there's a theme in localStorage or fall back to 'light-theme'
     return localStorage.getItem("theme") || "light-theme";
@@ -32,6 +37,12 @@ const CustomerLayout = (props: Props) => {
       <div className="w-64 bg-gray-800 text-white flex flex-col">
         <div className="p-4 text-2xl font-bold">Shop Sphere</div>
         <ul className="flex flex-col p-4 space-y-4">
+          <li className="flex items-center gap-5">
+            <img src={DefaultAvatar} alt="" className="w-10 h-10 rounded-lg" />
+            <a href="/" className="hover:text-gray-400 cur">
+              Hello, {accountInfo?.username}
+            </a>
+          </li>
           <li>
             <a href="/" className="hover:text-gray-400">
               Home
