@@ -1,6 +1,8 @@
-import { login } from "@/api/service";
+import { googleLogin, login } from "@/api/service";
 import { getUserInfo } from "@/store/slice/userInfoSlice";
 import { AppDispatch } from "@/store/store";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons for visibility toggle
 import { useDispatch } from "react-redux";
@@ -30,6 +32,21 @@ const Login = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const loginUsingGoogle = (crendentials: any) => {
+    const decodedCredentials = jwtDecode(crendentials.credential);
+    const { email, family_name, given_name } = decodedCredentials;
+
+    googleLogin({
+      email,
+      username: given_name,
+      firstname: given_name,
+      lastname: family_name,
+    }).then((res) => {
+      navigate("/shop");
+      dispatch(getUserInfo(res.data.user));
+    });
   };
 
   useEffect(() => {}, []);
@@ -72,8 +89,19 @@ const Login = () => {
             </span>
           </div>
         </div>
+        <div>
+          <div className="text-center">Sign in using</div>
+          <div className="mt-8 ">
+            <GoogleLogin
+              width={"100%"}
+              size={"large"}
+              onSuccess={loginUsingGoogle}
+            />
+          </div>
+        </div>
+
         <button
-          className="w-full bg-primary text-white p-3 mt-6"
+          className="w-full bg-slate-300 text-white p-3 mt-6"
           onClick={onLogin}
         >
           Login

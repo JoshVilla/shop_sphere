@@ -5,6 +5,8 @@ import cors from "cors";
 import getUsers from "./controllers/register/register.js";
 import register from "./controllers/register/addUser.js";
 import loginCustomer from "./controllers/login/loginCutomer.js";
+import googleLogin from "./controllers/login/googleLogin.js";
+
 dotenv.config();
 
 const app = express();
@@ -30,6 +32,7 @@ app.post("/register", register); // Register endpoint
 app.get("/users", getUsers); // Get users endpoint
 
 app.post("/login", loginCustomer);
+app.post("/googleLogin", googleLogin);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on port ${process.env.PORT || 5000}`);
