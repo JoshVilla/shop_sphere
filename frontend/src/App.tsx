@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,15 +8,20 @@ import {
 import Welcome from "./pages/welcome";
 import Homepage from "./pages/customerPage/homepage";
 import CustomerLayout from "./layout/CustomerLayout";
+import Account from "./pages/customerPage/account";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
+        {/* Root Route */}
         <Route index element={<Welcome />} />
-        <Route path="shop" element={<CustomerLayout />}>
-          <Route index element={<Homepage />} />{" "}
-          {/* Display Homepage when at /shop */}
+
+        {/* Customer Layout with Nested Routes */}
+        <Route path="main" element={<CustomerLayout />}>
+          <Route index element={<Homepage />} />
+          <Route path="account" element={<Account />} />
+          <Route path="shop" element={<Homepage />} /> {/* Route for /shop */}
         </Route>
       </>
     )

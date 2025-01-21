@@ -52,12 +52,12 @@ const CustomerLayout = (props: Props) => {
                 alt=""
                 className="w-10 h-10 rounded-lg"
               />
-              <a href="/" className="hover:text-gray-400 cur">
+              <a href="/main/account" className="hover:text-gray-400 cur">
                 Hello, {accountInfo?.username}
               </a>
             </li>
             <li>
-              <a href="/" className="hover:text-gray-400">
+              <a href="/main/shop" className="hover:text-gray-400">
                 Home
               </a>
             </li>

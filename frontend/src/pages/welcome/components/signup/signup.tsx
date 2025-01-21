@@ -52,7 +52,7 @@ const Signup = () => {
 
       if (res.status === 201) {
         toast.success("Registration successful!");
-        navigate("/shop");
+        navigate("/main");
         dispatch(getUserInfo(res.data.user));
       } else if (res.status === 200) {
         toast.error("Email already exists. Please use a different email.");

@@ -32,7 +32,7 @@ const Login = () => {
       const response = await login(formState);
 
       if (response.status === 200) {
-        navigate("/shop");
+        navigate("/main");
         dispatch(getUserInfo(response.data.user));
       }
     } catch (error) {
@@ -52,7 +52,7 @@ const Login = () => {
       firstname: given_name,
       lastname: family_name,
     }).then((res) => {
-      navigate("/shop");
+      navigate("/main");
       dispatch(getUserInfo(res.data.data));
     });
   };
