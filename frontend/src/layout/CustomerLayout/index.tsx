@@ -13,7 +13,6 @@ const CustomerLayout = (props: Props) => {
     (state: RootState) => state.userInfo.userInfo
   );
 
-  console.log(Object.keys(localStorage));
   const [theme, setTheme] = useState<string>(() => {
     // Check if there's a theme in localStorage or fall back to 'light-theme'
     return localStorage.getItem("theme") || "light-theme";

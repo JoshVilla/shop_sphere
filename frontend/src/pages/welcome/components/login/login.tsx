@@ -8,6 +8,12 @@ import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons for visi
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+interface GoogleJwtPayload {
+  email: string;
+  family_name: string;
+  given_name: string;
+}
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -35,7 +41,9 @@ const Login = () => {
   };
 
   const loginUsingGoogle = (crendentials: any) => {
-    const decodedCredentials = jwtDecode(crendentials.credential);
+    const decodedCredentials = jwtDecode<GoogleJwtPayload>(
+      crendentials.credential
+    );
     const { email, family_name, given_name } = decodedCredentials;
 
     googleLogin({
@@ -45,7 +53,7 @@ const Login = () => {
       lastname: family_name,
     }).then((res) => {
       navigate("/shop");
-      dispatch(getUserInfo(res.data.user));
+      dispatch(getUserInfo(res.data.data));
     });
   };
 
