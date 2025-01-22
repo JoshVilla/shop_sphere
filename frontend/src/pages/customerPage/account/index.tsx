@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import PasswordInput from "@/components/passwordInput";
+import { getUserInfo } from "@/store/slice/userInfoSlice";
 interface FormStateProps {
   username: string;
   firstname: string;
@@ -39,7 +40,7 @@ const Account = () => {
       });
 
       if (res.status === STATUS.SUCCESS) {
-        console.log(res);
+        dispatch(getUserInfo(res.data.updatedUser));
       }
     } catch (error) {
       console.log(error);
