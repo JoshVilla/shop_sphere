@@ -8,6 +8,7 @@ interface IUserInfo {
   email: string;
   firstname: string;
   lastname: string;
+  isThirdPartyAccount: number;
 }
 
 // Initial state typing

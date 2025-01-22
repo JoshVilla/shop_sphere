@@ -54,7 +54,7 @@ const Login = () => {
     }).then((res) => {
       navigate("/main");
       console.log(res.data);
-      dispatch(getUserInfo(res.data.user));
+      dispatch(getUserInfo(res.data.data));
     });
   };
 

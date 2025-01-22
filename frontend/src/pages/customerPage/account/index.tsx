@@ -124,37 +124,40 @@ const Account = () => {
                 }
               />
             </div>
-            <div className="flex flex-col gap-10">
-              <div className="text-textColor text-lg font-bold">
-                Change Password
+            {!info?.isThirdPartyAccount && (
+              <div className="flex flex-col gap-10">
+                <div className="text-textColor text-lg font-bold">
+                  Change Password
+                </div>
+                <div>
+                  <label>Enter your new password: </label>
+                  <PasswordInput
+                    placeholder="Enter your new password"
+                    value={passwordState.newPassword}
+                    onChange={(e) =>
+                      setPasswordState((prev) => ({
+                        ...prev,
+                        newPassword: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
+                <div>
+                  <label>Enter your old password</label>
+                  <PasswordInput
+                    placeholder="Enter your old password"
+                    value={passwordState.password}
+                    onChange={(e) =>
+                      setPasswordState((prev) => ({
+                        ...prev,
+                        password: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
               </div>
-              <div>
-                <label>Enter your new password: </label>
-                <PasswordInput
-                  placeholder="Enter your new password"
-                  value={passwordState.newPassword}
-                  onChange={(e) =>
-                    setPasswordState((prev) => ({
-                      ...prev,
-                      newPassword: e.target.value,
-                    }))
-                  }
-                />
-              </div>
-              <div>
-                <label>Enter your old password</label>
-                <PasswordInput
-                  placeholder="Enter your old password"
-                  value={passwordState.password}
-                  onChange={(e) =>
-                    setPasswordState((prev) => ({
-                      ...prev,
-                      password: e.target.value,
-                    }))
-                  }
-                />
-              </div>
-            </div>
+            )}
+
             <button
               onClick={handleSaveAccount}
               type="submit"
