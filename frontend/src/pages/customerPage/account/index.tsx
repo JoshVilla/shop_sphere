@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import PasswordInput from "@/components/passwordInput";
 import { getUserInfo } from "@/store/slice/userInfoSlice";
+import { ToastContainer, toast } from "react-toastify";
 interface FormStateProps {
   username: string;
   firstname: string;
@@ -39,8 +40,14 @@ const Account = () => {
         ...passwordState,
       });
 
-      if (res.status === STATUS.SUCCESS) {
+      console.log(res.status, 400);
+
+      if (res.status === STATUS.SUCCESS && res.data.isSuccess === 1) {
         dispatch(getUserInfo(res.data.updatedUser));
+        toast(res.data.msg, { type: "success" });
+        setPasswordState({ password: "", newPassword: "" });
+      } else {
+        toast(res.data.msg, { type: "error" });
       }
     } catch (error) {
       console.log(error);
@@ -60,6 +67,7 @@ const Account = () => {
 
   return (
     <div className="h-screen bg-primary text-text">
+      <ToastContainer />
       <div className="w-full  p-8">
         <div className="text-2xl font-semibold">My Account</div>
         <div className="mt-10">

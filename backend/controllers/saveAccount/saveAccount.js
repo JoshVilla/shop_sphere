@@ -16,7 +16,7 @@ const saveAccount = async (req, res) => {
     if (user.isThirdPartyAccount === 0) {
       if (password && newPassword) {
         if (!password || !user.password) {
-          return res.status(400).json({
+          return res.json({
             msg: "Password is required for non-third-party accounts",
             isSuccess: 0,
           });
@@ -24,7 +24,7 @@ const saveAccount = async (req, res) => {
 
         const isPasswordMatch = await compare(password, user.password);
         if (!isPasswordMatch) {
-          return res.status(400).json({
+          return res.json({
             msg: "Current password is incorrect",
             isSuccess: 0,
           });
