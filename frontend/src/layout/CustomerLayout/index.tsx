@@ -43,8 +43,10 @@ const CustomerLayout = (props: Props) => {
     <div>
       <div className="flex h-screen">
         {/* Sidebar */}
-        <div className="w-64 bg-gray-800 text-white flex flex-col">
-          <div className="p-4 text-2xl font-bold">Shop Sphere</div>
+        <div className="w-64 bg-secondary text-white flex flex-col">
+          <div className="p-4 text-2xl font-bold text-textColor">
+            Shop Sphere
+          </div>
           <ul className="flex flex-col p-4 space-y-4">
             <li className="flex items-center gap-5">
               <img
@@ -52,27 +54,36 @@ const CustomerLayout = (props: Props) => {
                 alt=""
                 className="w-10 h-10 rounded-lg"
               />
-              <a href="/main/account" className="hover:text-gray-400 cur">
+              <a
+                href="/main/account"
+                className="hover:text-gray-400 text-textColor"
+              >
                 Hello, {accountInfo?.username}
               </a>
             </li>
             <li>
-              <a href="/main/shop" className="hover:text-gray-400">
+              <a
+                href="/main/shop"
+                className="hover:text-gray-400 text-textColor"
+              >
                 Home
               </a>
             </li>
             <li>
-              <a href="/products" className="hover:text-gray-400">
+              <a
+                href="/products"
+                className="hover:text-gray-400 text-textColor"
+              >
                 Products
               </a>
             </li>
             <li>
-              <a href="/cart" className="hover:text-gray-400">
+              <a href="/cart" className="hover:text-gray-400 text-textColor">
                 Cart
               </a>
             </li>
             <li>
-              <a href="/profile" className="hover:text-gray-400">
+              <a href="/profile" className="hover:text-gray-400 text-textColor">
                 Profile
               </a>
             </li>
@@ -81,11 +92,11 @@ const CustomerLayout = (props: Props) => {
 
         {/* Main Content */}
         <div className="flex-1 bg-gray-100">
-          <div className="bg-border px-8 py-4 flex justify-between items-center">
-            <button onClick={toggleTheme} className="text-text text-xl">
+          <div className="bg-darkSecondary px-8 py-4 flex justify-between items-center">
+            <button onClick={toggleTheme} className="text-textColor text-xl">
               {theme === "light-theme" ? <IoIosSunny /> : <IoIosMoon />}
             </button>
-            <button className="text-text" onClick={logout}>
+            <button className="text-textColor" onClick={logout}>
               Logout
             </button>
           </div>

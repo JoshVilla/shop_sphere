@@ -5,8 +5,8 @@ type Props = {};
 const Homepage = (props: Props) => {
   const state = useSelector((state) => state);
   return (
-    <div className="h-[100vh] bg-background text-text">
-      <div className="p-3 bg-btnBg">Home</div>
+    <div className="h-screen">
+      <div className="p-3 text-textColor">Hodme</div>
     </div>
   );
 };

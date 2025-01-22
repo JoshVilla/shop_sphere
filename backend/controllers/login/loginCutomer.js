@@ -27,11 +27,7 @@ const loginCustomer = async (req, res) => {
     // Respond with success
     return res.status(200).json({
       message: "Logged in successfully",
-      user: {
-        id: user._id,
-        email: user.email,
-        username: user.username,
-      }, // Include non-sensitive user details
+      user, // Include non-sensitive user details
     });
   } catch (error) {
     console.error("Error during login:", error.message);

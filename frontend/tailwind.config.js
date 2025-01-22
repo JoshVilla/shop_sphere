@@ -5,10 +5,10 @@ export default {
     extend: {
       colors: {
         primary: "var(--primary-color)",
-        background: "var(--background-color)",
-        text: "var(--text-color)",
-        border: "var(--border-color)",
-        btnBg: "var(--btn-color)",
+        secondary: "var(--secondary-color)",
+        textColor: "var(--text-color)",
+        darkSecondary: "var(--dark-secondary-color)",
+        btnBg: "var(--dark-secondary-color)",
       },
     },
   },

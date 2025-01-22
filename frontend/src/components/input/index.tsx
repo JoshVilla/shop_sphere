@@ -23,7 +23,7 @@ const Input: FC<InputProps> = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className={`bg-border text-text border border-border rounded px-4 py-1 focus:outline-none focus:ring-2 focus:ring-primary ml-4 ${className}`}
+      className={`bg-secondary text-text border border-border rounded px-4 py-1 focus:outline-none focus:ring-2 focus:ring-primary ml-4 ${className}`}
       {...props}
     />
   );

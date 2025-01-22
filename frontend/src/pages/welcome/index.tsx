@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import AdminShowcase from "@/assets/Admin_Showcase.jpg";
-import CustomerShowcase from "@/assets/Customer_Showcase.jpg";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 
@@ -8,11 +6,11 @@ const Welcome = () => {
   const [tab, setTab] = useState<number>(0);
   return (
     <div className="min-h-screen relative">
-      <div className=" text-border px-6 py-4 text-xl w-full absolute">
+      <div className=" text-textColor px-6 py-4 text-xl w-full absolute">
         <span className="font-bold">Shop</span>
         <span>Sphere</span>
       </div>
-      <div className="min-h-screen w-full flex justify-center items-center bg-background">
+      <div className="min-h-screen w-full flex justify-center items-center bg-secondary">
         <div className="w-2/6 p-4">
           <div className="text-center text-4xl p-6">
             {tab === 0 ? "Login" : "Signup"}

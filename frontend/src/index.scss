@@ -25,17 +25,27 @@
 // @import "./variables";
 
 :root.dark-theme {
-  --primary-color: #56666F;
-  --background-color:  #0E161B;
-  --text-color: #FFFFFF;
-  --border-color: #162022;
-  --btn-color: #314048;
+  --primary-color: #7b7d7f;
+  --secondary-color: #0A0A0A;
+  --dark-secondary-color: #101213;
+  --light-color: #FFFFFF;
+  --text-color: #ffffff
 }
 
 :root.light-theme {
-  --primary-color: #5A9FD4; /* Light blue or a similar primary color */
-  --background-color: #F9FAFB; /* A very light gray or off-white */
-  --text-color: #1A202C; /* Dark text for readability on light backgrounds */
-  --border-color: #E2E8F0; /* Subtle border color */
-  --btn-color: #3182CE; /* Slightly darker primary for buttons */
+  --primary-color: #f8f9fa;
+  --secondary-color: #e9ecef;
+  --dark-secondary-color: #212529;
+  --light-color: #FFFFFF;
+  --text-color: #000000
 }
+
+// --primary-color: #7b7d7f;
+// --secondary-color: #DFDFDF;
+// --dark-primary-color: #101213;
+// --light-color: #FFFFFF
+
+// --primary-color: #7b7d7f;
+// --secondary-color: #DFDFDF;
+// --dark-primary-color: #101213;
+// --light-color: #FFFFFF
