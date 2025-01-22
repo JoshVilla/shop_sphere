@@ -63,7 +63,7 @@ export const post = async (url: string, params: Record<string, any> = {}) => {
 
   return axios.post(`${apiUrl + url}`, data, {
     headers: {
-      "Content-Type": hasFiles ? undefined : "application/json", // Let Axios handle FormData headers
+      "Content-Type": hasFiles ? "multipart/form-data" : "application/json", // Correct Content-Type handling
     },
   });
 };

@@ -18,6 +18,7 @@ interface FormStateProps {
 const Account = () => {
   const dispatch = useDispatch<AppDispatch>();
   const info = useSelector((state: RootState) => state.userInfo.userInfo);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [formState, setFormState] = useState<FormStateProps>({
     username: "",
     firstname: "",
@@ -38,9 +39,8 @@ const Account = () => {
         ...formState,
         id: info?._id,
         ...passwordState,
+        avatar: selectedFile,
       });
-
-      console.log(res.status, 400);
 
       if (res.status === STATUS.SUCCESS && res.data.isSuccess === 1) {
         dispatch(getUserInfo(res.data.updatedUser));
@@ -51,6 +51,16 @@ const Account = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      console.log("Selected file:", file);
+    } else {
+      console.log("No file selected");
     }
   };
 
@@ -72,6 +82,17 @@ const Account = () => {
         <div className="text-2xl font-semibold">My Account</div>
         <div className="mt-10">
           <form action="" className="flex flex-col gap-10">
+            <div>
+              <label htmlFor="">Profile</label>
+              <div>
+                <Input
+                  type="file"
+                  name="myImage"
+                  accept="image/png, image/gif, image/jpeg"
+                  onChange={handleFileChange}
+                />
+              </div>
+            </div>
             <div>
               <label>Username: </label>
               <Input
