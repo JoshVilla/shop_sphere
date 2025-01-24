@@ -12,6 +12,7 @@ import upload from "./middleware/upload.js";
 dotenv.config();
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 
 // Middleware for JSON parsing
 app.use(express.json());

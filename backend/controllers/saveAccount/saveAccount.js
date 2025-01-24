@@ -1,27 +1,15 @@
+import multer from "multer";
 import { compare, hash } from "bcrypt";
 import UserModel from "../../models/Resgister.js";
 import cloudinary from "../../config/cloudinaryConfig.js";
-import fs from "fs";
 
-// Function to save Base64 encoded file
-const saveBase64Image = (base64Str, filename) => {
-  const base64Data = base64Str.replace(/^data:image\/\w+;base64,/, "");
-  fs.writeFileSync(`uploads/${filename}`, base64Data, "base64");
-  return `uploads/${filename}`; // Return the file path
-};
+// Configure multer for temporary file storage
+const upload = multer({ dest: "uploads/" });
 
 const saveAccount = async (req, res) => {
   try {
-    const {
-      username,
-      firstname,
-      lastname,
-      email,
-      password,
-      newPassword,
-      id,
-      avatar,
-    } = req.body;
+    const { username, firstname, lastname, email, password, newPassword, id } =
+      req.body;
 
     // Fetch user by ID
     const user = await UserModel.findById(id);
@@ -47,20 +35,18 @@ const saveAccount = async (req, res) => {
       }
     }
 
-    // Handle avatar upload (Base64 to file)
+    // Handle avatar upload
     let avatarUrl = "";
-    if (avatar) {
-      const avatarFilePath = saveBase64Image(
-        avatar,
-        `${Date.now()}-avatar.png`
-      );
-      const uploadResponse = await cloudinary.uploader.upload(avatarFilePath, {
+    console.log(req.body);
+    if (req.file) {
+      const uploadResponse = await cloudinary.uploader.upload(req.file.path, {
         folder: "profiles",
       });
       avatarUrl = uploadResponse.secure_url;
-    }
 
-    console.log(req.body);
+      // Optionally, delete the file from local storage after upload
+      fs.unlinkSync(req.file.path);
+    }
 
     // Prepare the data for update
     const newData = {

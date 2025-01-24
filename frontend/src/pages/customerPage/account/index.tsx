@@ -32,14 +32,13 @@ const Account = () => {
   });
 
   const handleSaveAccount = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     try {
-      e.preventDefault(); // Prevent the button's default behavior
-
       const res = await saveAccount({
         ...formState,
         id: info?._id,
         ...passwordState,
-        avatar: selectedFile,
+        avatar: selectedFile, // Send Base64 string
       });
 
       if (res.status === STATUS.SUCCESS && res.data.isSuccess === 1) {
@@ -50,15 +49,20 @@ const Account = () => {
         toast(res.data.msg, { type: "error" });
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      toast("Something went wrong", { type: "error" });
     }
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
-      console.log("Selected file:", file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedFile(reader.result as string); // Set Base64 string
+      };
+      reader.readAsDataURL(file); // Convert the file to Base64
+      console.log("File selected:", file);
     } else {
       console.log("No file selected");
     }
@@ -81,7 +85,11 @@ const Account = () => {
       <div className="w-full  p-8">
         <div className="text-2xl font-semibold">My Account</div>
         <div className="mt-10">
-          <form action="" className="flex flex-col gap-10">
+          <form
+            action=""
+            className="flex flex-col gap-10"
+            encType="multipart/form-data"
+          >
             <div>
               <label htmlFor="">Profile</label>
               <div>
