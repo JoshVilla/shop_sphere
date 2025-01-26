@@ -1,7 +1,7 @@
 import { googleLogin, login } from "@/api/service";
 import { getUserInfo } from "@/store/slice/userInfoSlice";
 import { AppDispatch } from "@/store/store";
-import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons for visibility toggle
