@@ -1,12 +1,14 @@
 import { googleLogin, login } from "@/api/service";
 import { getUserInfo } from "@/store/slice/userInfoSlice";
 import { AppDispatch } from "@/store/store";
-import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
+import { AxiosError } from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons for visibility toggle
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 interface GoogleJwtPayload {
   email: string;
@@ -32,11 +34,29 @@ const Login = () => {
       const response = await login(formState);
 
       if (response.status === 200) {
+        // Success: Navigate to main and dispatch user info
         navigate("/main");
         dispatch(getUserInfo(response.data.user));
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: AxiosError | any) {
+      // Handle errors here
+      if (error.response) {
+        const { status, data } = error.response;
+
+        // Check for specific status codes and log the response
+        if (status === 400 || status === 401 || status === 404) {
+          console.log("Error Status:", status);
+          console.log("Error Data:", data);
+          toast.error(data.message || "An error occurred. Please try again.");
+        } else {
+          // Handle unexpected status codes
+          toast.error("Unexpected error. Please try again later.");
+        }
+      } else {
+        // Network or other errors
+        console.log("Error:", error);
+        toast.error("Network error. Please check your connection.");
+      }
     }
   };
 
@@ -51,11 +71,15 @@ const Login = () => {
       username: given_name,
       firstname: given_name,
       lastname: family_name,
-    }).then((res) => {
-      navigate("/main");
-      console.log(res.data);
-      dispatch(getUserInfo(res.data.data));
-    });
+    })
+      .then((res) => {
+        navigate("/main");
+        console.log(res.data);
+        dispatch(getUserInfo(res.data.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {}, []);
@@ -115,6 +139,7 @@ const Login = () => {
         >
           Login
         </button>
+        <ToastContainer />
       </div>
     </React.Fragment>
   );

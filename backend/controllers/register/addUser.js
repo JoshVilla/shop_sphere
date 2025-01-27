@@ -27,6 +27,7 @@ const register = async (req, res) => {
       email,
       firstname: "",
       lastname: "",
+      hasStore: 0,
     });
 
     // Respond with success

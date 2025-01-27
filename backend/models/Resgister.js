@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  hasStore: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const UserModel = mongoose.model("User", UserSchema);
