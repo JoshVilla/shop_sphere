@@ -15,7 +15,7 @@ const loginCustomer = async (req, res) => {
     // Find user by email
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Email not found" });
     }
 
     // Compare hashed password
